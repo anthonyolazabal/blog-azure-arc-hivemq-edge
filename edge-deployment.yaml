@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hivemq-edge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hivemq-edge
+  template:
+    metadata:
+      labels:
+        app: hivemq-edge
+    spec:
+      containers:
+      - name: hivemq-edge
+        image: hivemq/hivemq-edge:latest
+        ports:
+        - containerPort: 1883
+        - containerPort: 8080
+        env:
+        - name: HIVEMQ_CONTROL_CENTER_USER
+          value: "admin"
+        - name: HIVEMQ_CONTROL_CENTER_PASSWORD
+          value: "password"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hivemq-edge
+spec:
+  selector:
+    app: hivemq-edge
+  ports:
+    - protocol: TCP
+      port: 1883
+      targetPort: 1883
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
