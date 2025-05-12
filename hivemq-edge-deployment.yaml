@@ -38,6 +38,7 @@ metadata:
   name: hivemq-edge
   namespace: edge
 spec:
+  type: NodePort
   selector:
     app: hivemq-edge
   ports:
