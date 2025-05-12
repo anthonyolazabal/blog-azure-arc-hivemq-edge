@@ -1,12 +1,15 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: Deployment\edge
+  name: edge
+  labels:
+    name: edge
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: edge
+  namespace: edge
 spec:
   replicas: 1
   selector:
@@ -33,6 +36,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: hivemq-edge
+  namespace: edge
 spec:
   selector:
     app: hivemq-edge
