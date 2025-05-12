@@ -42,9 +42,11 @@ spec:
     app: hivemq-edge
   ports:
     - protocol: TCP
+      name: mqtt
       port: 1883
       targetPort: 1883
     - protocol: TCP
+      name: ui
       port: 8080
       targetPort: 8080
 
